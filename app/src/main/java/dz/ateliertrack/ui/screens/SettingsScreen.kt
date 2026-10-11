@@ -32,13 +32,13 @@ fun SettingsScreen(lang: String, onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(if (fr) "Parametres" else "الإعدادات") },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, null) } }
+                title = { Text(if (fr) "Parametres" else "\u0627\u0644\u0625\u0639\u062f\u0627\u062f\u0627\u062a") },
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, contentDescription = if (fr) "Retour" else "\u0631\u062c\u0648\u0639") } }
             )
         }
     ) { pad ->
         Column(Modifier.fillMaxSize().padding(pad).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text(if (fr) "Langue / اللغة" else "اللغة / Langue")
+            Text(if (fr) "Langue / \u0627\u0644\u0644\u063a\u0629" else "\u0627\u0644\u0644\u063a\u0629 / Langue")
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterChip(
                     selected = fr,
@@ -48,10 +48,10 @@ fun SettingsScreen(lang: String, onBack: () -> Unit) {
                 FilterChip(
                     selected = !fr,
                     onClick = { scope.launch { LocaleHelper.setLang(context, LocaleHelper.ARABIC) } },
-                    label = { Text("العربية (RTL)") }
+                    label = { Text("\u0627\u0644\u0639\u0631\u0628\u064a\u0629 (RTL)") }
                 )
             }
-            Text(if (fr) "100% hors-ligne. Aucun compte. Donnees sur l'appareil uniquement." else "يعمل دون إنترنت. بدون حساب. البيانات على الجهاز فقط.")
+            Text(if (fr) "100% hors-ligne. Aucun compte. Donnees sur l'appareil uniquement." else "\u064a\u0639\u0645\u0644 \u062f\u0648\u0646 \u0625\u0646\u062a\u0631\u0646\u062a. \u0628\u062f\u0648\u0646 \u062d\u0633\u0627\u0628. \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0639\u0644\u0649 \u0627\u0644\u062c\u0647\u0627\u0632 \u0641\u0642\u0637.")
         }
     }
 }

@@ -51,26 +51,26 @@ fun TicketListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(if (fr) "AtelierTrack" else "أتيليي تراك") },
-                actions = { IconButton(onClick = onSettings) { Icon(Icons.Filled.Settings, null) } }
+                title = { Text(if (fr) "AtelierTrack" else "\u0623\u062a\u064a\u0644\u064a\u064a \u062a\u0631\u0627\u0643") },
+                actions = { IconButton(onClick = onSettings) { Icon(Icons.Filled.Settings, contentDescription = if (fr) "Param\u00e8tres" else "\u0627\u0644\u0625\u0639\u062f\u0627\u062f\u0627\u062a") } }
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = onAdd) { Icon(Icons.Filled.Add, null) }
+            FloatingActionButton(onClick = onAdd) { Icon(Icons.Filled.Add, contentDescription = if (fr) "Ajouter un ticket" else "\u0625\u0636\u0627\u0641\u0629 \u062a\u0630\u0643\u0631\u0629") }
         }
     ) { pad ->
         Column(Modifier.fillMaxSize().padding(pad).padding(12.dp)) {
             OutlinedTextField(
                 value = query,
                 onValueChange = viewModel::setQuery,
-                leadingIcon = { Icon(Icons.Filled.Search, null) },
-                label = { Text(if (fr) "Rechercher (client, appareil, panne)" else "بحث (زبون، جهاز، عطل)") },
+                leadingIcon = { Icon(Icons.Filled.Search, contentDescription = if (fr) "Rechercher" else "\u0628\u062d\u062b") },
+                label = { Text(if (fr) "Rechercher (client, appareil, panne)" else "\u0628\u062d\u062b (\u0632\u0628\u0648\u0646\u060c \u062c\u0647\u0627\u0632\u060c \u0639\u0637\u0644)") },
                 modifier = Modifier.fillMaxWidth()
             )
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(vertical = 8.dp)) {
                 AssistChip(
                     onClick = { viewModel.setStatusFilter(null) },
-                    label = { Text(if (fr) "Tous" else "الكل") }
+                    label = { Text(if (fr) "Tous" else "\u0627\u0644\u0643\u0644") }
                 )
                 TicketStatus.entries.forEach { s ->
                     AssistChip(
@@ -80,7 +80,7 @@ fun TicketListScreen(
                 }
             }
             if (shown.isEmpty()) {
-                Text(if (fr) "Aucun ticket. Ajoutez le premier." else "لا توجد تذاكر بعد.")
+                Text(if (fr) "Aucun ticket. Ajoutez le premier." else "\u0644\u0627 \u062a\u0648\u062c\u062f \u062a\u0630\u0627\u0643\u0631 \u0628\u0639\u062f.")
             } else {
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     items(shown, key = { it.id }) { t ->

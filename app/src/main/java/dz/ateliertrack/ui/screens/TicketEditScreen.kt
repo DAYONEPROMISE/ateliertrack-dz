@@ -60,8 +60,8 @@ fun TicketEditScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(if (existing == null) t("Nouveau ticket", "تذكرة جديدة") else t("Modifier ticket", "تعديل التذكرة")) },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, null) } }
+                title = { Text(if (existing == null) t("Nouveau ticket", "\u062a\u0630\u0643\u0631\u0629 \u062c\u062f\u064a\u062f\u0629") else t("Modifier ticket", "\u062a\u0639\u062f\u064a\u0644 \u0627\u0644\u062a\u0630\u0643\u0631\u0629")) },
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, contentDescription = t("Retour", "\u0631\u062c\u0648\u0639")) } }
             )
         }
     ) { pad ->
@@ -69,21 +69,21 @@ fun TicketEditScreen(
             Modifier.fillMaxSize().padding(pad).padding(16.dp).verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            OutlinedTextField(clientName, { clientName = it }, label = { Text(t("Nom du client *", "اسم الزبون *")) }, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(clientPhone, { clientPhone = it }, label = { Text(t("Telephone", "الهاتف")) }, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(brand, { brand = it }, label = { Text(t("Marque *", "العلامة *")) }, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(model, { model = it }, label = { Text(t("Modele *", "الموديل *")) }, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(deviceType, { deviceType = it }, label = { Text(t("Type (telephone, TV, electromenager)", "النوع (هاتف، تلفاز...)")) }, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(fault, { fault = it }, label = { Text(t("Panne *", "العطل *")) }, modifier = Modifier.fillMaxWidth(), minLines = 2)
-            OutlinedTextField(parts, { parts = it }, label = { Text(t("Pieces detachees / notes", "قطع الغيار / ملاحظات")) }, modifier = Modifier.fillMaxWidth(), minLines = 2)
-            OutlinedTextField(price, { price = it.filter { c -> c.isDigit() } }, label = { Text(t("Prix estime (DA)", "السعر (دج)")) }, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(deposit, { deposit = it.filter { c -> c.isDigit() } }, label = { Text(t("Acompte (DA)", "العربون (دج)")) }, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(clientName, { clientName = it }, label = { Text(t("Nom du client *", "\u0627\u0633\u0645 \u0627\u0644\u0632\u0628\u0648\u0646 *")) }, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(clientPhone, { clientPhone = it }, label = { Text(t("Telephone", "\u0627\u0644\u0647\u0627\u062a\u0641")) }, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(brand, { brand = it }, label = { Text(t("Marque *", "\u0627\u0644\u0639\u0644\u0627\u0645\u0629 *")) }, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(model, { model = it }, label = { Text(t("Modele *", "\u0627\u0644\u0645\u0648\u062f\u064a\u0644 *")) }, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(deviceType, { deviceType = it }, label = { Text(t("Type (telephone, TV, electromenager)", "\u0627\u0644\u0646\u0648\u0639 (\u0647\u0627\u062a\u0641\u060c \u062a\u0644\u0641\u0627\u0632...)")) }, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(fault, { fault = it }, label = { Text(t("Panne *", "\u0627\u0644\u0639\u0637\u0644 *")) }, modifier = Modifier.fillMaxWidth(), minLines = 2)
+            OutlinedTextField(parts, { parts = it }, label = { Text(t("Pieces detachees / notes", "\u0642\u0637\u0639 \u0627\u0644\u063a\u064a\u0627\u0631 / \u0645\u0644\u0627\u062d\u0638\u0627\u062a")) }, modifier = Modifier.fillMaxWidth(), minLines = 2)
+            OutlinedTextField(price, { price = it.filter { c -> c.isDigit() } }, label = { Text(t("Prix estime (DA)", "\u0627\u0644\u0633\u0639\u0631 (\u062f\u062c)")) }, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(deposit, { deposit = it.filter { c -> c.isDigit() } }, label = { Text(t("Acompte (DA)", "\u0627\u0644\u0639\u0631\u0628\u0648\u0646 (\u062f\u062c)")) }, modifier = Modifier.fillMaxWidth())
             ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = !expanded }) {
                 OutlinedTextField(
                     value = PdfReceipt.statusLabel(status, fr),
                     onValueChange = {},
                     readOnly = true,
-                    label = { Text(t("Statut", "الحالة")) },
+                    label = { Text(t("Statut", "\u0627\u0644\u062d\u0627\u0644\u0629")) },
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
                     modifier = Modifier.fillMaxWidth().menuAnchor()
                 )
@@ -97,7 +97,7 @@ fun TicketEditScreen(
                 }
             }
             if (errors.isNotEmpty()) {
-                Text(t("Champs requis manquants.", "حقول ناقصة."))
+                Text(t("Champs requis manquants.", "\u062d\u0642\u0648\u0644 \u0646\u0627\u0642\u0635\u0629."))
             }
             Button(
                 onClick = {
@@ -122,7 +122,7 @@ fun TicketEditScreen(
                     }
                 },
                 modifier = Modifier.fillMaxWidth()
-            ) { Text(t("Enregistrer", "حفظ")) }
+            ) { Text(t("Enregistrer", "\u062d\u0641\u0638")) }
         }
     }
 }
