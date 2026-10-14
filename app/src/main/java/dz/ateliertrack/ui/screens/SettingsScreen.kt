@@ -5,53 +5,79 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.FilterChip
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dz.ateliertrack.R
+import dz.ateliertrack.ui.AtelierCard
+import dz.ateliertrack.ui.AtelierHeader
 import dz.ateliertrack.util.LocaleHelper
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(lang: String, onBack: () -> Unit) {
-    val fr = lang != "ar"
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val ar = lang == LocaleHelper.ARABIC
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(if (fr) "Parametres" else "\u0627\u0644\u0625\u0639\u062f\u0627\u062f\u0627\u062a") },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, contentDescription = if (fr) "Retour" else "\u0631\u062c\u0648\u0639") } }
+    AtelierHeader(
+        title = stringResource(R.string.settings_title),
+        navigateUp = onBack,
+        backLabel = stringResource(R.string.action_back)
+    )
+    Column(
+        Modifier.fillMaxSize().padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        AtelierCard {
+            Text(
+                stringResource(R.string.settings_language),
+                style = MaterialTheme.typography.titleSmall
             )
-        }
-    ) { pad ->
-        Column(Modifier.fillMaxSize().padding(pad).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text(if (fr) "Langue / \u0627\u0644\u0644\u063a\u0629" else "\u0627\u0644\u0644\u063a\u0629 / Langue")
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
                 FilterChip(
-                    selected = fr,
+                    selected = !ar,
                     onClick = { scope.launch { LocaleHelper.setLang(context, LocaleHelper.FRENCH) } },
-                    label = { Text("Francais") }
+                    label = { Text(stringResource(R.string.settings_lang_fr), style = MaterialTheme.typography.labelLarge) },
+                    shape = RoundedCornerShape(50),
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = MaterialTheme.colorScheme.primary,
+                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                        containerColor = MaterialTheme.colorScheme.surface,
+                        labelColor = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 )
                 FilterChip(
-                    selected = !fr,
+                    selected = ar,
                     onClick = { scope.launch { LocaleHelper.setLang(context, LocaleHelper.ARABIC) } },
-                    label = { Text("\u0627\u0644\u0639\u0631\u0628\u064a\u0629 (RTL)") }
+                    label = { Text(stringResource(R.string.settings_lang_ar), style = MaterialTheme.typography.labelLarge) },
+                    shape = RoundedCornerShape(50),
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = MaterialTheme.colorScheme.primary,
+                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                        containerColor = MaterialTheme.colorScheme.surface,
+                        labelColor = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 )
             }
-            Text(if (fr) "100% hors-ligne. Aucun compte. Donnees sur l'appareil uniquement." else "\u064a\u0639\u0645\u0644 \u062f\u0648\u0646 \u0625\u0646\u062a\u0631\u0646\u062a. \u0628\u062f\u0648\u0646 \u062d\u0633\u0627\u0628. \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0639\u0644\u0649 \u0627\u0644\u062c\u0647\u0627\u0632 \u0641\u0642\u0637.")
+        }
+        AtelierCard {
+            Text(
+                stringResource(R.string.settings_about),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }

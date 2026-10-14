@@ -3,6 +3,7 @@ package dz.ateliertrack
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -20,8 +21,9 @@ class MainActivity : ComponentActivity() {
             val lang by LocaleHelper.observeLang(this).collectAsState(initial = LocaleHelper.FRENCH)
             val effective = lang.ifBlank { LocaleHelper.FRENCH }
             applyAppLocale(effective)
+            val dark = isSystemInDarkTheme()
             val vm: TicketViewModel = viewModel(factory = TicketViewModel.factory(app.repository))
-            AtelierTrackTheme {
+            AtelierTrackTheme(darkTheme = dark) {
                 AtelierNav(viewModel = vm, lang = effective)
             }
         }

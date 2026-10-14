@@ -29,7 +29,6 @@ fun AtelierNav(viewModel: TicketViewModel, lang: String) {
         composable(Routes.LIST) {
             TicketListScreen(
                 viewModel = viewModel,
-                lang = lang,
                 onOpen = { nav.navigate(Routes.detail(it)) },
                 onAdd = { nav.navigate(Routes.edit(null)) },
                 onSettings = { nav.navigate(Routes.SETTINGS) }
@@ -43,7 +42,6 @@ fun AtelierNav(viewModel: TicketViewModel, lang: String) {
             val ticket by viewModel.ticketFlow(id).collectAsState(initial = null)
             TicketDetailScreen(
                 ticket = ticket,
-                lang = lang,
                 onBack = { nav.popBackStack() },
                 onEdit = { nav.navigate(Routes.edit(id)) },
                 onAdvance = { t -> viewModel.advance(t) },
@@ -60,7 +58,6 @@ fun AtelierNav(viewModel: TicketViewModel, lang: String) {
             val ticket by viewModel.ticketFlow(id).collectAsState(initial = null)
             TicketEditScreen(
                 existing = if (id == 0L) null else ticket,
-                lang = lang,
                 onBack = { nav.popBackStack() },
                 onSave = { t -> viewModel.save(t) { nav.popBackStack() } }
             )
