@@ -138,4 +138,4 @@ private fun DetailRow(label: String, value: String) {
 
 /** Status label resolved from resources for non-composable call sites. */
 private fun dz.ateliertrack.data.TicketStatus.label(context: android.content.Context): String =
-    PdfReceipt.statusLabel(this, context)
+    PdfReceipt.statusLabel(context, this)
