@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import dz.ateliertrack.R
 import dz.ateliertrack.data.Ticket
 import dz.ateliertrack.data.TicketStatus
-import dz.ateliertrack.ui.AtelierHeader
+import dz.ateliertrack.ui.theme.AtelierHeader
 import dz.ateliertrack.util.PriceFormatter
 import dz.ateliertrack.util.TicketValidator
 

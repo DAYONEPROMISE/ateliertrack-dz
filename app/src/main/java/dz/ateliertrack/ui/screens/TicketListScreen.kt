@@ -35,9 +35,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dz.ateliertrack.R
 import dz.ateliertrack.data.TicketStatus
-import dz.ateliertrack.ui.AtelierCard
-import dz.ateliertrack.ui.AtelierEmptyState
-import dz.ateliertrack.ui.AtelierHeader
+import dz.ateliertrack.ui.theme.AtelierCard
+import dz.ateliertrack.ui.theme.AtelierEmptyState
+import dz.ateliertrack.ui.theme.AtelierHeader
 import dz.ateliertrack.ui.TicketViewModel
 import dz.ateliertrack.util.PdfReceipt
 import dz.ateliertrack.util.PriceFormatter
